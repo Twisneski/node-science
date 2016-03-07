@@ -10,18 +10,16 @@ class Node {
 class List {
   constructor () {
     this.head = null
+    this.tail = null
   }
 
   add (node) {
     if (this.head) {
-      let current = this.head
-
-      while(current.next) {
-        current = current.next
-      }
-      current.next = node
+      this.tail.next = node
+      this.tail = node
     } else {
       this.head = node
+      this.tail = node
     }
   }
 }

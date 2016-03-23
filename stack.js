@@ -10,8 +10,19 @@ class Node {
 class Stack {
   constructor (size) {
     this.head = null
+    this.tail = null
     this.maxSize = size
     this.length = 0
+
+    for (let i = 0; i < size; i++) {
+      this.push(new Node())
+    }
+
+    this.length = 0
+
+    //     if (!this.tail) {
+    //   this.tail = node
+    // }
   }
 
   push (item) {
@@ -27,6 +38,14 @@ class Stack {
       node = new Node(item)
     }
 
+    let current = this.head
+
+    while(current.next !== this.tail) {
+      current = current.next
+    }
+
+    current.next = null
+
     node.next = this.head
     this.head = node
 
@@ -34,9 +53,16 @@ class Stack {
   }
 
   pop () {
+    if (!length) {
+      throw new Error('Stack empty')
+    }
+
     const toRemove = this.head
+    const emptyNode = new Node()
 
     this.head = toRemove.next
+    this.tail.next = emptyNode
+    this.tail = emptyNode
     this.length--
 
     return toRemove
